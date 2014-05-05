@@ -1,6 +1,6 @@
 <?php
 
-/**
+/* ==========================================================================
  * Functions
  *
  * Core functionality and initial theme setup
@@ -8,18 +8,14 @@
  * @package WordPress
  * @subpackage Umlilo for WordPress
  * @since Umlilo for WordPress 1.0
- */
+========================================================================== */
 
-/**
- * Initiate Umlilo for WordPress
- */
+
+
 /* ==========================================================================
  Inititiate Umlilo for Wordpress
 ========================================================================== */
-
-if ( ! function_exists( 'foundation_setup' ) ) :
-
-function foundation_setup() {
+if ( ! function_exists( 'foundation_setup' ) ) : function foundation_setup() {
 
 	// Content Width
 	if ( ! isset( $content_width ) ) $content_width = 900;
@@ -56,10 +52,10 @@ add_action( 'after_setup_theme', 'foundation_setup' );
 
 endif;
 
-/**
- * Enqueue Scripts and Styles for Front-End
- */
 
+/* ==========================================================================
+ Enqueue Scripts and Styles for Front-end
+========================================================================== */
 if ( ! function_exists( 'umlilo_js' ) ) :
 
 function umlilo_js() {
@@ -100,10 +96,11 @@ add_action( 'wp_enqueue_scripts', 'umlilo_css' );
 
 endif;
 
-/**
- * Register Navigation Menus
- */
 
+
+/* ==========================================================================
+ Register Navigation Menu/s
+========================================================================== */
 if ( ! function_exists( 'foundation_menus' ) ) :
 
 // Register wp_nav_menus
@@ -142,10 +139,11 @@ function foundation_page_menu() {
 
 endif;
 
-/**
- * Navigation Menu Adjustments
- */
 
+
+/* ==========================================================================
+ Navigation Menu Adjustent
+========================================================================== */
 // Add class to navigation sub-menu
 class foundation_navigation extends Walker_Nav_Menu {
 
@@ -163,9 +161,11 @@ function display_element( $element, &$children_elements, $max_depth, $depth=0, $
 	}
 }
 
-/**
- * Create pagination
- */
+
+
+/* ==========================================================================
+ Create Pagination
+========================================================================== */
 
 if ( ! function_exists( 'foundation_pagination' ) ) :
 
@@ -175,16 +175,17 @@ global $wp_query;
 
 $big = 999999999;
 
-$links = paginate_links( array(
-	'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-	'format' => '?paged=%#%',
-	'prev_next' => true,
-	'prev_text' => '&laquo;',
-	'next_text' => '&raquo;',
-	'current' => max( 1, get_query_var('paged') ),
-	'total' => $wp_query->max_num_pages,
-	'type' => 'list'
-)
+$links = paginate_links( 
+	array(
+		'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+		'format' => '?paged=%#%',
+		'prev_next' => true,
+		'prev_text' => '&laquo;',
+		'next_text' => '&raquo;',
+		'current' => max( 1, get_query_var('paged') ),
+		'total' => $wp_query->max_num_pages,
+		'type' => 'list'
+	)
 );
 
 $pagination = str_replace('page-numbers','pagination',$links);
@@ -195,16 +196,19 @@ echo $pagination;
 
 endif;
 
-/**
- * Register Sidebars
- */
+
+
+/* ==========================================================================
+ Register Sidebards
+========================================================================== */
 
 if ( ! function_exists( 'foundation_widgets' ) ) :
 
 function foundation_widgets() {
 
 	// Sidebar Right
-	register_sidebar( array(
+	register_sidebar( 
+		array(
 			'id' => 'foundation_sidebar_right',
 			'name' => __( 'Sidebar Right', 'foundation' ),
 			'description' => __( 'This sidebar is located on the right-hand side of each page.', 'foundation' ),
@@ -212,62 +216,19 @@ function foundation_widgets() {
 			'after_widget' => '</div>',
 			'before_title' => '<h5>',
 			'after_title' => '</h5>',
-		) );
-
-	// Sidebar Footer Column One
-	register_sidebar( array(
-			'id' => 'foundation_sidebar_footer_one',
-			'name' => __( 'Sidebar Footer One', 'foundation' ),
-			'description' => __( 'This sidebar is located in column one of your theme footer.', 'foundation' ),
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget' => '</div>',
-			'before_title' => '<h5>',
-			'after_title' => '</h5>',
-		) );
-
-	// Sidebar Footer Column Two
-	register_sidebar( array(
-			'id' => 'foundation_sidebar_footer_two',
-			'name' => __( 'Sidebar Footer Two', 'foundation' ),
-			'description' => __( 'This sidebar is located in column two of your theme footer.', 'foundation' ),
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget' => '</div>',
-			'before_title' => '<h5>',
-			'after_title' => '</h5>',
-		) );
-
-	// Sidebar Footer Column Three
-	register_sidebar( array(
-			'id' => 'foundation_sidebar_footer_three',
-			'name' => __( 'Sidebar Footer Three', 'foundation' ),
-			'description' => __( 'This sidebar is located in column three of your theme footer.', 'foundation' ),
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget' => '</div>',
-			'before_title' => '<h5>',
-			'after_title' => '</h5>',
-		) );
-
-	// Sidebar Footer Column Four
-	register_sidebar( array(
-			'id' => 'foundation_sidebar_footer_four',
-			'name' => __( 'Sidebar Footer Four', 'foundation' ),
-			'description' => __( 'This sidebar is located in column four of your theme footer.', 'foundation' ),
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget' => '</div>',
-			'before_title' => '<h5>',
-			'after_title' => '</h5>',
-		) );
-
+			)
+		);
 	}
 
 add_action( 'widgets_init', 'foundation_widgets' );
 
 endif;
 
-/**
- * Custom Avatar Classes
- */
 
+
+/* ==========================================================================
+ Custom Avatar Classes
+========================================================================== */
 if ( ! function_exists( 'foundation_avatar_css' ) ) :
 
 function foundation_avatar_css($class) {
@@ -279,10 +240,11 @@ add_filter('get_avatar','foundation_avatar_css');
 
 endif;
 
-/**
- * Custom Post Excerpt
- */
 
+
+/* ==========================================================================
+ Custom post excerpt
+========================================================================== */
 if ( ! function_exists( 'foundation_excerpt' ) ) :
 
 function foundation_excerpt($text) {
@@ -309,10 +271,11 @@ add_filter('get_the_excerpt', 'foundation_excerpt');
 
 endif;
 
-/** 
- * Comments Template
- */
 
+
+/* ==========================================================================
+ Comments Template
+========================================================================== */
 if ( ! function_exists( 'foundation_comment' ) ) :
 
 function foundation_comment( $comment, $args, $depth ) {
@@ -367,10 +330,11 @@ function foundation_comment( $comment, $args, $depth ) {
 }
 endif;
 
-/**
- * Remove Class from Sticky Post
- */
 
+
+/* ==========================================================================
+ Remove Class from Sticky Post
+========================================================================== */
 if ( ! function_exists( 'foundation_remove_sticky' ) ) :
 
 function foundation_remove_sticky($classes) {
@@ -382,11 +346,12 @@ add_filter('post_class','foundation_remove_sticky');
 
 endif;
 
-/**
- * Custom Foundation Title Tag
- * @see http://codex.wordpress.org/Plugin_API/Filter_Reference/wp_title
- */
 
+
+/* ==========================================================================
+ Custom Foundation Title Tag
+ @see http://codex.wordpress.org/Plugin_API/Filter_Reference/wp_title
+========================================================================== */
 function foundation_title( $title, $sep ) {
 	global $paged, $page;
 
@@ -410,22 +375,25 @@ function foundation_title( $title, $sep ) {
 
 add_filter( 'wp_title', 'foundation_title', 10, 2 );
 
-/**
- * Retrieve Shortcodes
- * @see: http://fwp.drewsymo.com/shortcodes/
- */
 
+
+
+/* ==========================================================================
+  Retrieve Shortcodes
+ * @see: http://fwp.drewsymo.com/shortcodes/
+========================================================================== */
 $foundation_shortcodes = trailingslashit( get_template_directory() ) . 'inc/shortcodes.php';
 
 if (file_exists($foundation_shortcodes)) {
 	require( $foundation_shortcodes );
 }
 
-/** 
- * ADD ROOTS HEAD CLEANUP
- * @http://benword.com/how-to-hide-that-youre-using-wordpress/
- */
 
+
+/* ==========================================================================
+ ADD ROOTS HEAD CLEANUP
+ * @http://benword.com/how-to-hide-that-youre-using-wordpress/
+========================================================================== */
 if ( ! function_exists( 'roots_head_cleanup' ) ) :
 
 function roots_head_cleanup() {
@@ -517,14 +485,21 @@ endif;
 
 
 
-/**
- * UMLILO RESOURCE LOADER
- */
-
+/* ==========================================================================
+ UMLILO RESOURCE LOADER
+========================================================================== */
 $resource_loader = trailingslashit( get_template_directory() ) . 'inc/resource-loader.php';
 
 if (file_exists($resource_loader)) {
 	require( $resource_loader );
 }
+
+
+
+/* ==========================================================================
+ Custom Functions here....
+========================================================================== */
+
+
 
 ?>
