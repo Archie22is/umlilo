@@ -6,13 +6,16 @@
  * Core functionality and initial theme setup
  *
  * @package WordPress
- * @subpackage Infrastrukt for WordPress
- * @since Infrastrukt for WordPress 1.0
+ * @subpackage Umlilo for WordPress
+ * @since Umlilo for WordPress 1.0
  */
 
 /**
- * Initiate Infrastrukt for WordPress
+ * Initiate Umlilo for WordPress
  */
+/* ==========================================================================
+ Inititiate Umlilo for Wordpress
+========================================================================== */
 
 if ( ! function_exists( 'foundation_setup' ) ) :
 
@@ -57,9 +60,9 @@ endif;
  * Enqueue Scripts and Styles for Front-End
  */
 
-if ( ! function_exists( 'infrastrukt_js' ) ) :
+if ( ! function_exists( 'umlilo_js' ) ) :
 
-function infrastrukt_js() {
+function umlilo_js() {
 
 	if (!is_admin()) {
 		/** 
@@ -67,18 +70,18 @@ function infrastrukt_js() {
 		 */
 		wp_enqueue_script( 'fastclick', get_template_directory_uri().'/lib/fastclick/0.6.9/fastclick.js', array('jquery'), '0.6.9', true );
 		wp_enqueue_script( 'foundation', get_template_directory_uri().'/lib/foundation/js/foundation.min.js', array('fastclick'), '5', true );
-		wp_enqueue_script( 'infrastrukt-js', get_template_directory_uri().'/js/infrastrukt.js', array('foundation'), '1.0', true);
+		wp_enqueue_script( 'umlilo-js', get_template_directory_uri().'/js/umlilo.js', array('foundation'), '1.0', true);
 		if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
 	}
 }
 
-add_action( 'wp_enqueue_scripts', 'infrastrukt_js' );
+add_action( 'wp_enqueue_scripts', 'umlilo_js' );
 
 endif;
 
-if ( ! function_exists( 'infrastrukt_css' ) ) :
+if ( ! function_exists( 'umlilo_css' ) ) :
 
-function infrastrukt_css() {
+function umlilo_css() {
 
 	if (!is_admin()) {
 
@@ -93,7 +96,7 @@ function infrastrukt_css() {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'infrastrukt_css' );
+add_action( 'wp_enqueue_scripts', 'umlilo_css' );
 
 endif;
 
@@ -443,12 +446,12 @@ function roots_head_cleanup() {
 add_action('init', 'roots_head_cleanup');
 endif;
 
-if ( ! function_exists( 'infrastrukt_customize' ) ) :
+if ( ! function_exists( 'umlilo_customize' ) ) :
 
-function infrastrukt_customize($wp_customize) {
+function umlilo_customize($wp_customize) {
 
-	$wp_customize->add_section( 'infrastrukt_topbar_settings', array(
-		'title'          => __( 'Top Bar Settings', 'infrastrukt' ),
+	$wp_customize->add_section( 'umlilo_topbar_settings', array(
+		'title'          => __( 'Top Bar Settings', 'umlilo' ),
 		'priority'       => 35,
 	) );
 
@@ -460,7 +463,7 @@ function infrastrukt_customize($wp_customize) {
 
 	$wp_customize->add_control( 'topbar_position', array(
 	    'label'      => __( 'Top Bar Position', 'themename' ),
-	    'section'    => 'infrastrukt_topbar_settings',
+	    'section'    => 'umlilo_topbar_settings',
 	    'settings'   => 'topbar_position',
 	    'type'       => 'radio',
 	    'choices'    => array(
@@ -478,7 +481,7 @@ function infrastrukt_customize($wp_customize) {
 
 	$wp_customize->add_control( 'contain_to_grid', array(
 		'label'   => 'Contain To Grid',
-		'section' => 'infrastrukt_topbar_settings',
+		'section' => 'umlilo_topbar_settings',
 		'type'    => 'checkbox',
 		'value'    => 'contain_to_grid',
 	) );
@@ -491,7 +494,7 @@ function infrastrukt_customize($wp_customize) {
 
 	$wp_customize->add_control( 'clickable_menu', array(
 		'label'   => 'Clickable Top Bar',
-		'section' => 'infrastrukt_topbar_settings',
+		'section' => 'umlilo_topbar_settings',
 		'type'    => 'checkbox',
 	) );
 
@@ -503,17 +506,19 @@ function infrastrukt_customize($wp_customize) {
 
 	$wp_customize->add_control( 'set_menu_title', array(
 		'label'   => 'Set Menu Title',
-		'section' => 'infrastrukt_topbar_settings',
+		'section' => 'umlilo_topbar_settings',
 		'type'    => 'text',
 	) );
 
 }
 
-add_action('customize_register', 'infrastrukt_customize');
+add_action('customize_register', 'umlilo_customize');
 endif;
 
+
+
 /**
- * INFRASTRUKT RESOURCE LOADER
+ * UMLILO RESOURCE LOADER
  */
 
 $resource_loader = trailingslashit( get_template_directory() ) . 'inc/resource-loader.php';

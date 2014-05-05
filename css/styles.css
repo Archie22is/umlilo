@@ -142,32 +142,32 @@ h1, h2, h3, h4, h5, h6, a:link {
     position: fixed;
   }
 }
-/* -----------------------------------------
+/* ==========================================================================
    Shared Styles
------------------------------------------ */
-/* line 79, ../sass/styles.scss */
+========================================================================== */
+/* line 80, ../sass/styles.scss */
 .wp-caption-text {
   text-align: center;
 }
 
-/* line 80, ../sass/styles.scss */
+/* line 81, ../sass/styles.scss */
 .site-content .gallery {
   margin-bottom: 1.5rem;
 }
 
-/* line 83, ../sass/styles.scss */
+/* line 84, ../sass/styles.scss */
 .site-content .gallery a img {
   border: none;
   height: auto;
   max-width: 90%;
 }
 
-/* line 88, ../sass/styles.scss */
+/* line 89, ../sass/styles.scss */
 .site-content .gallery dd {
   margin: 0;
 }
 
-/* line 94, ../sass/styles.scss */
+/* line 95, ../sass/styles.scss */
 embed,
 iframe,
 object {
